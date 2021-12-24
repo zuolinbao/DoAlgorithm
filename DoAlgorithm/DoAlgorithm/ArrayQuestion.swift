@@ -47,9 +47,18 @@ class ArrayQuestion {
         return nums.count
     }
     
+    //Q136
+    func singleNumber(_ nums: [Int]) -> Int {
+        var result = 0
+        for num in nums {
+            result ^= num
+        }
+        return result
+    }
+    
     
     func test() {
         var nums: [Int] = [0,1,2,2,3,0,4,2]
-        ArrayQuestion().removeElement(&nums, 2)
+        var _ = ArrayQuestion().removeElement(&nums, 2)
     }
 }

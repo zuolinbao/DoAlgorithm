@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     
     @IBAction func test(_ sender: UIButton) {
         
-        ArrayQuestion().test()
+        print(DFS().permute([1,2]))
     }
     
 
