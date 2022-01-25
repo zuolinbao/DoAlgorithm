@@ -7,6 +7,16 @@
 
 import Foundation
 class ArrayQuestion {
+    //Q11
+    func maxArea(_ height: [Int]) -> Int {
+        var result = Int.min
+        for leftIndex in 0..<height.count-1 {
+            for rightIndex in (leftIndex+1)..<height.count {
+               result = max(min(height[leftIndex], height[rightIndex])*(rightIndex-leftIndex), result)
+            }
+        }
+        return result
+    }
     //Q26
     func removeDuplicates(_ nums: inout [Int]) -> Int {
         guard nums.count > 1 else {
@@ -45,6 +55,57 @@ class ArrayQuestion {
             nums.removeSubrange(indexV..<nums.count)
         }
         return nums.count
+    }
+    
+    //Q34
+    func searchRange(_ nums: [Int], _ target: Int) -> [Int] {
+        var left = -1
+        var right = -1
+        for (index,val) in nums.enumerated() {
+            if val == target {
+                if left == -1 {
+                    left = index
+                } else {
+                    right = index
+                }
+            }
+            if val > target {
+                break
+            }
+        }
+        if left != -1 && right == -1 {
+            return [left,left]
+        }
+        return [left,right]
+    }
+    
+    //Q42
+    func trap(_ height: [Int]) -> Int {
+        var leftMaxs: [Int] = []
+        var rightMaxs: [Int] = []
+        for h in height {
+            if leftMaxs.isEmpty {
+                leftMaxs.append(h)
+            } else if h > leftMaxs.last! {
+                leftMaxs.append(h)
+            } else {
+                leftMaxs.append(leftMaxs.last!)
+            }
+        }
+        for h in height.reversed() {
+            if rightMaxs.isEmpty {
+                rightMaxs.append(h)
+            } else if h > rightMaxs.first! {
+                rightMaxs.insert(h, at: 0)
+            } else {
+                rightMaxs.insert(rightMaxs.first!, at: 0)
+            }
+        }
+        var result = 0
+        for (index,val) in height.enumerated() {
+            result += min(leftMaxs[index], rightMaxs[index]) - val
+        }
+        return result
     }
     
     //Q136

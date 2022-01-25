@@ -70,5 +70,36 @@ public class ListNode {
         }
         return headNode.next
     }
+    //Q23
+    func reverseList(_ head: ListNode?) -> ListNode? {
+        guard head != nil && head?.next != nil else {
+            return head
+        }
+        let last = reverseList(head?.next)
+        head?.next?.next = head
+        head?.next = nil
+        return last
+    }
+    
+    //Q876
+    func middleNode(_ head: ListNode?) -> ListNode? {
+        if head == nil || head?.next == nil {
+            return head
+        }
+        if head?.next?.next == nil {
+            return head?.next
+        }
+        var slow = head
+        var fast = head
+        while fast?.next?.next != nil {
+            fast = fast?.next?.next
+            slow = slow?.next
+        }
+        if fast?.next == nil {
+            return slow
+        }
+        return slow?.next
+    }
+
 }
 

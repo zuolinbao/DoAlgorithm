@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     @IBAction func test(_ sender: UIButton) {
         
 //        print(DFS().permute([1,2]))
-        print(Tree().buildTree([1,2], [1,2]))
+        print(ArrayQuestion().maxArea([1,8,6,2,5,4,8,3,7]))
     }
     
 
