@@ -80,6 +80,17 @@ class Tree {
         return result
     }
     
+    //Q100
+    func isSameTree(_ p: TreeNode?, _ q: TreeNode?) -> Bool {
+        if p == nil && q == nil {
+            return true
+        }
+        if p != nil && q != nil {
+            return p!.val==q!.val && isSameTree(p?.left, q?.left) && isSameTree(p?.right, q?.right)
+        }
+        return false
+    }
+    
     //Q104
     func maxDepth(_ root: TreeNode?) -> Int {
         guard let node = root else { return 0 }
