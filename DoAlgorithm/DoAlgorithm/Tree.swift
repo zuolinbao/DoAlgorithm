@@ -54,6 +54,21 @@ class Tree {
         return  nodes.sorted() == nodes
     }
     
+    //Q101
+    func isSymmetric(_ root: TreeNode?) -> Bool {
+        return isSymmetric(root?.left, root?.right)
+    }
+    
+    func isSymmetric(_ p: TreeNode?, _ q: TreeNode?) -> Bool {
+        if p == nil && q == nil {
+            return true
+        }
+        guard p != nil && q != nil else {
+            return false
+        }
+        return p!.val==q!.val && isSymmetric(p?.left, q?.right) && isSymmetric(p?.right, q?.left)
+    }
+    
     //Q102
     func levelOrder(_ root: TreeNode?) -> [[Int]] {
         guard let node = root else { return [] }

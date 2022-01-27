@@ -81,6 +81,26 @@ public class ListNode {
         return last
     }
     
+    //Q203
+    func removeElements(_ head: ListNode?, _ val: Int) -> ListNode? {
+        guard let node = head else { return nil }
+        let newHead = ListNode.init(Int.min)
+        var p = newHead
+        p.next = node
+        while p.next != nil {
+            if p.next!.val != val {
+                p = p.next!
+            } else {
+                var q = p.next
+                while q != nil && q!.val == val {
+                    q = q!.next
+                }
+                p.next = q
+            }
+        }
+        return newHead.next
+    }
+    
     //Q876
     func middleNode(_ head: ListNode?) -> ListNode? {
         if head == nil || head?.next == nil {
