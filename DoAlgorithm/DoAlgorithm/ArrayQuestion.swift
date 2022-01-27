@@ -10,9 +10,14 @@ class ArrayQuestion {
     //Q11
     func maxArea(_ height: [Int]) -> Int {
         var result = Int.min
-        for leftIndex in 0..<height.count-1 {
-            for rightIndex in (leftIndex+1)..<height.count {
-               result = max(min(height[leftIndex], height[rightIndex])*(rightIndex-leftIndex), result)
+        var left = 0
+        var right = height.count-1
+        while left < right {
+            result = max(min(height[left], height[right])*(right-left), result)
+            if height[left] > height[right] {
+                right -= 1
+            } else {
+                left += 1
             }
         }
         return result
@@ -117,9 +122,53 @@ class ArrayQuestion {
         return result
     }
     
+    //Q239
+    func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
+        var result: [Int] = []
+        let startIndex = k-1
+        let singleQueue = SingleQueue()
+        for num in 0...startIndex {
+            singleQueue.push(num)
+        }
+        for index in (k-1)..<nums.count {
+            singleQueue.push(nums[index])
+            result.append(singleQueue.max()!)
+            singleQueue.pop(nums[index-k+1])
+        }
+        return result
+    }
+    
     
     func test() {
         var nums: [Int] = [0,1,2,2,3,0,4,2]
         var _ = ArrayQuestion().removeElement(&nums, 2)
+    }
+}
+
+
+class SingleQueue {
+    var queue: [Int] = []
+    func max() -> Int? {
+        return queue.first
+    }
+    func push(_ num: Int) {
+        guard !queue.isEmpty else {
+            queue.append(num)
+            return
+        }
+        while queue.last != nil {
+            if queue.last! < num {
+                queue.removeLast()
+            }
+        }
+        queue.append(num)
+    }
+    func pop(_ num: Int) {
+        guard let maxNum = queue.max() else {
+            return
+        }
+        if maxNum == num {
+            queue.removeAll()
+        }
     }
 }
