@@ -101,6 +101,39 @@ public class ListNode {
         return newHead.next
     }
     
+    //Q234
+    func isPalindrome(_ head: ListNode?) -> Bool {
+        guard head != nil else {
+            return false
+        }
+        var slow = head
+        var fast = head
+        while fast?.next != nil {
+            fast = fast?.next?.next
+            if fast == nil {
+                break
+            }
+            slow = slow?.next
+        }
+        var headR: ListNode?
+        if fast == nil {
+            headR = reverseList(slow?.next)
+        } else {
+            headR = reverseList(slow)
+        }
+        var headP = head
+        while headP != nil && headR != nil {
+            if headP!.val == headR!.val {
+                headP = headP?.next
+                headR = headR?.next
+            } else {
+                return false
+            }
+        }
+        return true
+    }
+    
+    
     //Q876
     func middleNode(_ head: ListNode?) -> ListNode? {
         if head == nil || head?.next == nil {

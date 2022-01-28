@@ -84,6 +84,27 @@ class ArrayQuestion {
         return [left,right]
     }
     
+    //Q35
+    func searchInsert(_ nums: [Int], _ target: Int) -> Int {
+        guard !nums.isEmpty else {
+            return -1
+        }
+        var left = 0
+        var right = nums.count
+        while right > left {
+            let mid = left + (right - left) / 2;
+            if nums[mid] == target {
+                return mid
+            } else if nums[mid] > target {
+                right = mid
+            } else {
+                left = mid + 1
+            }
+        }
+        return left
+    }
+
+    
     //Q42
     func trap(_ height: [Int]) -> Int {
         var leftMaxs: [Int] = []

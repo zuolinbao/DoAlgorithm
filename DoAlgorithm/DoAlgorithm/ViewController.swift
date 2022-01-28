@@ -31,6 +31,7 @@ class ViewController: UIViewController {
         
 //        print(DFS().permute([1,2]))
         print(ArrayQuestion().maxArea([2,3,4,5,18,17,6]))
+        TwoPointer().strStr("hello", "ll")
     }
     
 

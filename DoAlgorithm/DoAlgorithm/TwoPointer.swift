@@ -19,6 +19,30 @@ class TwoPointer {
         return result
     }
     
+    //Q28
+    func strStr(_ haystack: String, _ needle: String) -> Int {
+        if needle == "" {
+            return 0
+        }
+        for (index,cH) in haystack.enumerated() {
+            guard haystack.count-index >= needle.count else {
+                return -1
+            }
+            if cH == needle.first {
+                for (indexN,cN) in needle.enumerated() {
+                    let val = haystack[haystack.index(haystack.startIndex, offsetBy: index+indexN)]
+                    if indexN == needle.count-1 && cN == val {
+                        return index
+                    }
+                    if cN != val {
+                        break
+                    }
+                }
+            }
+        }
+        return -1
+    }
+    
     func longestPalindrome(_ s: String, _ left: Int, _ right:Int) -> String {
         let array = Array(s)
         if left + 1 == array.count || array[left] != array[right] {
